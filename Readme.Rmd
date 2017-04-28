@@ -1,7 +1,22 @@
-library(jpeg)
+---
+title: "Readme"
+output: github_document
+---
 
-setwd("~/R/NASA Lights")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
+Recently I 
+
+```{r cars}
+summary(cars)
+```
+
+
+
+
+```{r function}
 run_quarters <- function(file2012, file2016) {
   map_2012 <- jpeg::readJPEG(file2012)
   map_2016 <- jpeg::readJPEG(file2016)
@@ -21,10 +36,10 @@ run_quarters <- function(file2012, file2016) {
   rm(map_2016)
   
   for (i in 1:4) {
-    new <- maps_2016[[i]] - maps_2012[[i]]
+    new  <- maps_2016[[i]] - maps_2012[[i]]
     gone <- maps_2012[[i]] - maps_2016[[i]]
     
-    new <- replace(new, new < 0, 0)
+    new  <- replace(new, new < 0, 0)
     gone <- replace(gone, gone < 0, 0)
     
     diffs <-
@@ -44,13 +59,5 @@ run_quarters <- function(file2012, file2016) {
     rm(new, gone, diffs)
   }
 }
-
-run_quarters('2012/BlackMarble_2012_A1_gray.jpg','2016/BlackMarble_2016_A1_gray.jpg')
-run_quarters('2012/BlackMarble_2012_A2_gray.jpg','2016/BlackMarble_2016_A2_gray.jpg')
-run_quarters('2012/BlackMarble_2012_B1_gray.jpg','2016/BlackMarble_2016_B1_gray.jpg')
-run_quarters('2012/BlackMarble_2012_B2_gray.jpg','2016/BlackMarble_2016_B2_gray.jpg')
-run_quarters('2012/BlackMarble_2012_c1_gray.jpg','2016/BlackMarble_2016_C1_gray.jpg')
-run_quarters('2012/BlackMarble_2012_c2_gray.jpg','2016/BlackMarble_2016_C2_gray.jpg')
-run_quarters('2012/BlackMarble_2012_D1_gray.jpg','2016/BlackMarble_2016_D1_gray.jpg')
-run_quarters('2012/BlackMarble_2012_D2_gray.jpg','2016/BlackMarble_2016_D2_gray.jpg')
+```
 
