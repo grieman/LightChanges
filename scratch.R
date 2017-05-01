@@ -54,3 +54,26 @@ run_quarters('2012/BlackMarble_2012_c2_gray.jpg','2016/BlackMarble_2016_C2_gray.
 run_quarters('2012/BlackMarble_2012_D1_gray.jpg','2016/BlackMarble_2016_D1_gray.jpg')
 run_quarters('2012/BlackMarble_2012_D2_gray.jpg','2016/BlackMarble_2016_D2_gray.jpg')
 
+
+
+
+
+
+
+eigth <- "A1"
+
+Q1 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 1, "color.jpg", sep="_"))
+Q2 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 2, "color.jpg", sep="_"))
+Q3 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 3, "color.jpg", sep="_"))
+Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="_"))
+
+
+diff[1:10800, 1:10800]         <- Q1
+diff[10801:21600, 1:10800]     <- Q2
+diff[1:10800, 10801:21600]     <- Q3
+diff[10801:21600, 10801:21600] <- Q4
+
+rm(Q1, Q2, Q3, Q4)
+
+
+jpeg::writeJPEG(diff, paste("diff/BlackMarble_diff", eigth, "color.jpg", sep="_"))
