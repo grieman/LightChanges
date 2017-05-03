@@ -62,18 +62,34 @@ run_quarters('2012/BlackMarble_2012_D2_gray.jpg','2016/BlackMarble_2016_D2_gray.
 
 eigth <- "A1"
 
-Q1 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 1, "color.jpg", sep="_"))
-Q2 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 2, "color.jpg", sep="_"))
-Q3 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 3, "color.jpg", sep="_"))
-Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="_"))
+Q1 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 1, "color.jpg", sep="_"))[,,1]
+Q2 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 2, "color.jpg", sep="_"))[,,1]
+Q3 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 3, "color.jpg", sep="_"))[,,1]
+Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="_"))[,,1]
+ 
+layer1 <- cbind(rbind(Q1, Q2),rbind(Q3, Q4))
+save(layer1, file = "layer1.Rdata")
+rm(Q1, Q2, Q3,Q4, layer1)
+
+Q1 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 1, "color.jpg", sep="_"))[,,2]
+Q2 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 2, "color.jpg", sep="_"))[,,2]
+Q3 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 3, "color.jpg", sep="_"))[,,2]
+Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="_"))[,,2]
+
+layer2 <- cbind(rbind(Q1, Q2),rbind(Q3, Q4))
+save(layer2, file = "layer2.Rdata")
+rm(Q1, Q2, Q3,Q4, layer2)
+
+Q1 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 1, "color.jpg", sep="_"))[,,3]
+Q2 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 2, "color.jpg", sep="_"))[,,3]
+Q3 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 3, "color.jpg", sep="_"))[,,3]
+Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="_"))[,,3]
+
+layer3 <- cbind(rbind(Q1, Q2),rbind(Q3, Q4))
+rm(Q1, Q2, Q3,Q4)
 
 
-diff[1:10800, 1:10800]         <- Q1
-diff[10801:21600, 1:10800]     <- Q2
-diff[1:10800, 10801:21600]     <- Q3
-diff[10801:21600, 10801:21600] <- Q4
-
-rm(Q1, Q2, Q3, Q4)
-
+load("layer2.Rdata")
+out <- abind::abind(layer2, layer3, along=3)
 
 jpeg::writeJPEG(diff, paste("diff/BlackMarble_diff", eigth, "color.jpg", sep="_"))
