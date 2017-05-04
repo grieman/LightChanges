@@ -88,8 +88,7 @@ Q4 <- jpeg::readJPEG(paste("diff/BlackMarble_diff", eigth, 4, "color.jpg", sep="
 layer3 <- cbind(rbind(Q1, Q2),rbind(Q3, Q4))
 rm(Q1, Q2, Q3,Q4)
 
-
 load("layer2.Rdata")
-out <- abind::abind(layer2, layer3, along=3)
+out <- abind::abind(layer1,layer2, layer3, along=3)
 
 jpeg::writeJPEG(diff, paste("diff/BlackMarble_diff", eigth, "color.jpg", sep="_"))
